@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Animal</title>
+</head>
+<body>
+
+
+<form action="#" method="post">
+    <check if="{{ isset(@errors['animal'])}}">
+        <p>{{ @errors['animal']}}</p>
+
+    </check>
+
+    <label>Animal
+        <input type="text" name="animal" id="animal"></label>
+
+    <input type="submit" value="Next">
+
+</form>
+
+
+
+
+</body>
+</html>

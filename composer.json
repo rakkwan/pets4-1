@@ -1,0 +1,16 @@
+{
+  "name": "jgoodric/328/pets3",
+  "authors": [
+    {
+      "name": "Jittima Goodrich",
+      "email": "jgoodrich4@mail.greenriver.edu"
+    },
+    {
+      "name": "Kat Truitt",
+      "email": "ktruitt@mail.greenriver.edu"
+    }
+  ],
+  "require": {
+    "bcosca/fatfree-core": "dev-master"
+  }
+}
