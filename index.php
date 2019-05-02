@@ -15,6 +15,8 @@
 
     //require autoload file
     require_once ('vendor/autoload.php');
+    // require validation file
+    require_once('model/validation-functions.php');
 
     // create an instance of the base class
     $f3 = Base::instance();
@@ -24,8 +26,7 @@
 
     $f3->set('colors', array('pink', 'green', 'blue'));
 
-    // require validation file
-    require_once('model/validation-functions.php');
+
 
     // define a default route
     $f3->route('GET /@pet', function($f3, $param)
@@ -63,41 +64,35 @@
 
     $f3->route('GET|POST /order', function($f3)
     {
-        $_SESSION = array();
-
-        if(isset($_POST['animal']))
+        //$_SESSION = array();
+        // If form has been submitted, validate
+        if(!empty($_POST))
         {
+            //Get data from form
             $animal = $_POST['animal'];
-            if(validString($animal))
-            {
-                $_SESSION['animal'] = $animal;
-
-                $f3->reroute('/order2');
-            }
-            else
-            {
-                $f3->set("errors['animal']", "Please enter an animal.");
-                $f3->set("previousAnimal", $animal);
-            }
-        }
-
-        if(isset($_POST['qty']))
-        {
             $qty = $_POST['qty'];
-            if(validQty($qty))
-            {
-                $_SESSION['qty'] = $qty;
 
+            //Add data to the hive
+            $f3->set('animal', $animal);
+            $f3->set('qty', $qty);
+
+            // if data is valid
+            if(validString($animal) && validQty($qty))
+            {
+                // Write data to Session
+                $_SESSION['animal'] = $animal;
+                $_SESSION['qty'] = $qty;
                 $f3->reroute('/order2');
             }
-            else
+            if(!validString($animal))
             {
-                $f3->set("errors['qty']", "Quantity must be larger than 0");
-                $f3->set("previousQty", $qty);
+                $f3->set("errors['animal']", "Please enter an animal");
+            }
+            if(!validQty($qty))
+            {
+                $f3->set("errors['qty]", "Please enter a valid quantity");
             }
         }
-
-
 
         $view = new Template();
         echo $view->render("views/form1.html");

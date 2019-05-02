@@ -10,15 +10,17 @@
 <form action="#" method="post">
     <check if="{{ isset(@errors['animal'])}}">
         <p>{{ @errors['animal']}}</p>
-
     </check>
 
     <label>Animal
-        <input type="text" name="animal" value="{{ @previousAnimal }}">
+        <input type="text" name="animal" value="{{ @animal }}">
     </label>
 
-    <label>
-        <input type="text" name="qty" value="{{ @previousQty }}">
+    <check if="{{ isset(@errors['qty']) }}">
+        <p>{{ @errors['qty'] }}</p>
+    </check><br><br>
+    <label>Quantity
+        <input type="text" name="qty" value="{{ @qty }}">
     </label>
 
     <input type="submit" value="Next">
