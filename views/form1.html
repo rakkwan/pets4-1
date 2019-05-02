@@ -14,10 +14,14 @@
     </check>
 
     <label>Animal
-        <input type="text" name="animal" id="animal"></label>
+        <input type="text" name="animal" value="{{ @previousAnimal }}">
+    </label>
+
+    <label>
+        <input type="text" name="qty" value="{{ @previousQty }}">
+    </label>
 
     <input type="submit" value="Next">
-
 </form>
 
 

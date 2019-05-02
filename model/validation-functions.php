@@ -16,3 +16,8 @@ function validString($string)
 {
     return (!empty($string) && ctype_alpha($string));
 }
+
+function validQty($qty)
+{
+    return (!empty($qty) && ctype_digit($qty) && $qty >= 1);
+}

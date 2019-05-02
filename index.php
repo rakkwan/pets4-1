@@ -77,8 +77,27 @@
             else
             {
                 $f3->set("errors['animal']", "Please enter an animal.");
+                $f3->set("previousAnimal", $animal);
             }
         }
+
+        if(isset($_POST['qty']))
+        {
+            $qty = $_POST['qty'];
+            if(validQty($qty))
+            {
+                $_SESSION['qty'] = $qty;
+
+                $f3->reroute('/order2');
+            }
+            else
+            {
+                $f3->set("errors['qty']", "Quantity must be larger than 0");
+                $f3->set("previousQty", $qty);
+            }
+        }
+
+
 
         $view = new Template();
         echo $view->render("views/form1.html");
