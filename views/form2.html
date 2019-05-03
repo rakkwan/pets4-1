@@ -30,12 +30,12 @@
         <!-- display checkboxes using repeat -->
         <repeat group="{{ @traits }}" value="{{ @traitOption }}">
             <label>
-                <input type="checkbox" name="trait[]" value="{{ @traitOption }}">
-                         <!-- check if any checkboxes are checked -->
-                <check if="{{ !empty(@traitOption) && in_array(@traitOption, @trait) }}">
+                <input type="checkbox" name="trait[]" value="{{ @traitOption }}"
+
+                <check if="{{ !empty($_POST['trait']) && in_array(@traitOption, $_POST['trait']) }}">
                     checked="checked"
                 </check>
-                 {{ @traitOption }} </label><br>
+                 >{{ @traitOption }} </label><br>
         </repeat>
     </p>
 

@@ -117,17 +117,24 @@
             {
                 //add data to session
                 $_SESSION['color'] = $color;
+                $_SESSION['trait'] = $trait;
 
-                //Basic animal with no traits
-                if (empty($trait)) {
-                    $_SESSION['trait'] = "No traits selected";
+                if(empty($trait))
+                {
+                    $_SESSION['trait'] = "No trait selected";
                 }
-                else {
-                    //selections were made, store data to session
-                    $_SESSION['trait'] = implode(', ', $trait);
+                else
+                {
+                    $_SESSION['trait'] =  implode(', ', $trait);
                 }
+
                 //Redirect to results, if all is running well
                 $f3->reroute('/results');
+            }
+            else
+            {
+                $f3->set("errors['color']", "Please pick a color");
+                //$f3->set("errors['trait']", "No trait selected");
             }
         }
         //if form is not filled out properly, display form2 again. FORM IS STICKY!
