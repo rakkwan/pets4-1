@@ -5,7 +5,7 @@
     <title>Animal Color</title>
 </head>
 <body>
-
+<!-- Post form to itself -->
 <form action="#" method="post">
     <check if="{{ isset(@errors['color'])}}">
         <p>{{ @errors['color']}}</p>
@@ -21,6 +21,22 @@
 
         </select>
     </label>
+
+    <p>Select Traits:
+        <!--check for errors, if present, make corrections -->
+        <check if="{{ @errors['trait'] }}">
+            <span class="err">{{ @errors['trait'] }}</span>
+        </check><br>
+        <!-- display checkboxes using repeat -->
+        <repeat group="{{ @traits }}" value="{{ @traitOption }}">
+            <label><input type="checkbox" name="trait[]" value="{{ @traitOption }}"
+                         <!-- check if any checkboxes are checked -->
+                <check if="{{ !empty(@trait) && in_array(@traitOption, @trait) }}">
+                    checked="checked"
+                </check>
+                > {{ @traitOption }}</label><br>
+        </repeat>
+    </p>
 
     <button type="submit">Submit</button>
 </form>

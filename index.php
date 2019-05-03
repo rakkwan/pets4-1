@@ -25,8 +25,9 @@
     $f3->set('DEBUG', 3);
 
     $f3->set('colors', array('pink', 'green', 'blue'));
-
-
+    //set traits array to make checkboxes
+    $f3->set('traits', array('fat','skinny','featherless', 'large', 'medium',
+    'small','lazy','active','hyper','slimey','fluffy'));
 
     // define a default route
     $f3->route('GET /@pet', function($f3, $param)
@@ -100,26 +101,41 @@
 
     $f3->route('GET|POST /order2', function($f3)
     {
-        //$_SESSION = array();
-        if (isset($_POST['color']))
+        //if post array is not empty -> do all the things below
+        if(!empty($_POST))
         {
+            //Get the data from form
             $color = $_POST['color'];
-            if (validColor($color))
+            $trait= $_POST['trait'];
+
+            //store data in the hive
+            $f3->set('color',$color);
+            $f3->set('trait',$trait);
+
+            //check if form is valid
+            if(validForm())
             {
+                //add data to session
                 $_SESSION['color'] = $color;
+
+                //Basic animal with no traits
+                if (empty($trait)) {
+                    $_SESSION['trait'] = "No traits selected";
+                }
+                else {
+                    //selections were made, store data to session
+                    $_SESSION['trait'] = implode(', ', $trait);
+                }
+                //Redirect to results, if all is running well
                 $f3->reroute('/results');
             }
-            else
-            {
-                $f3->set("errors['color']", "Please enter a color.");
-            }
         }
+        //if form is not filled out properly, display form2 again. FORM IS STICKY!
         $view = new Template();
         echo $view->render("views/form2.html");
     });
 
-
-    $f3->route('GET|POST /results', function()
+    $f3->route('GET /results', function()
     {
        // $_SESSION['color'] = $_POST['color'];
         $view = new Template();
