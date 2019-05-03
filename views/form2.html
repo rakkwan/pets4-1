@@ -29,9 +29,10 @@
         </check><br>
         <!-- display checkboxes using repeat -->
         <repeat group="{{ @traits }}" value="{{ @traitOption }}">
-            <label><input type="checkbox" name="trait[]" value="{{ @traitOption }}">
+            <label>
+                <input type="checkbox" name="trait[]" value="{{ @traitOption }}">
                          <!-- check if any checkboxes are checked -->
-                <check if="{{ !empty(@trait) && in_array(@traitOption, @trait) }}">
+                <check if="{{ !empty(@traitOption) && in_array(@traitOption, @trait) }}">
                     checked="checked"
                 </check>
                  {{ @traitOption }} </label><br>

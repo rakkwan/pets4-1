@@ -10,13 +10,7 @@ function validForm()
 {
     global $f3;
     $isValid = true;
-  /*  if(!validString($f3->get('animal')))
-    {
-        $isValid = false;
-        //$_SESSION['animal'] = $animal;
-        //$f3->reroute('/order2');
-        $f3->set("errors['animal']", "Please enter an animal.");
-    }*/
+
     if (!validColor($f3->get('color')))
     {
         $isValid = false;
@@ -26,6 +20,7 @@ function validForm()
 
     if (!validTraits($f3->get('trait'))) {
         $isValid = false;
+
         $f3->set("errors['trait']", "Invalid selection");
     }
 
